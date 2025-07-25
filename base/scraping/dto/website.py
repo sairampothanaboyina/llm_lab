@@ -10,4 +10,4 @@ class Website:
         self.url = url
 
     def __str__(self):
-        return self.url
+        return f"Website[ title:{self.title}, url:{self.url}, description:{self.description}]"

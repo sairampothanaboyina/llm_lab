@@ -1,10 +1,17 @@
 import os
-from dotenv import load_dotenv
+from base.llm.secrets.const.secret_type import SecretType
 
 class Secret:
 
-    OPENAI_API_KEY: str
+    __SECRETS: dict[SecretType, str]
+
     def __init__(self):
-        load_dotenv(override=True)
-        self.OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+        self.__SECRETS = {SecretType.CHATGPT: os.getenv("OPENAI_API_KEY")}
+
+    def get_secret(self, secret_type: SecretType) -> str:
+        if secret_type is None:
+            raise ValueError(f"Secret type {secret_type} is not defined")
+        return self.__SECRETS[secret_type]
+
+
 
